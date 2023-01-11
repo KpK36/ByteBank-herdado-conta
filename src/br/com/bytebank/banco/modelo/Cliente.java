@@ -40,6 +40,7 @@ public class Cliente {
 
 	public String getNome() {
 		return this.nome;
+		
 	}
 	
 	/** Metodo para definir o atributo nome do objeto cliente
