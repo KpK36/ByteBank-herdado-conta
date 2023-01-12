@@ -1,18 +1,20 @@
 package br.com.bytebank.banco.modelo;
 
+import java.util.Comparator;
+
 public abstract class Conta {
 
 	// por padrao os valores default sao zeros, caso não seja definido nenhum outro,
 	// em caso de objeto e string é null
 	// forcando a usar seus metodos para ver seus atributos
+	
 	private double saldo;
 	private int numero;
 	private int agencia;
 	private Cliente titular;
 
-	private static int totalContas; // static é para definir uma variavel da classe e nao do objeto. Uma especie de
-									// variavel
-	// global da classe, que pode ser vista por todas as instancia de seus objetos
+	private static int totalContas; // static é para definir uma variavel da classe e nao do objeto. 
+									// global da classe, que pode ser vista por todas as instancia de seus objetos
 
 	/**
 	 * Inicializa uma conta a partir de um numero e uma agencia
@@ -24,8 +26,7 @@ public abstract class Conta {
 	public Conta(int numero, int agencia, Cliente titular) {
 
 		// o construtor é uma rotina de inicialização
-		// os construtores servem para inicializar atributos
-		// criar validacao para nao ter contas iguais (numero e agencia iguais)
+		// os construtores servem para inicializar atributos		
 
 		if (numero < 1000 || numero > 2000) {
 
@@ -181,5 +182,7 @@ public abstract class Conta {
 		return true;
 
 	}
+	
+	
 
 }
