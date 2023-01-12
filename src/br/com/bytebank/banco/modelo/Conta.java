@@ -2,7 +2,7 @@ package br.com.bytebank.banco.modelo;
 
 import java.util.Comparator;
 
-public abstract class Conta {
+public abstract class Conta implements Comparable<Conta>{
 
 	// por padrao os valores default sao zeros, caso não seja definido nenhum outro,
 	// em caso de objeto e string é null
@@ -155,6 +155,11 @@ public abstract class Conta {
 	public void setTitular(Cliente titular) {
 		this.titular = titular;
 		System.out.println("Titular definido com sucesso: " + getTitular().getNome());
+	}
+	
+	@Override
+	public int compareTo(Conta conta) {		 
+		return Double.compare(this.saldo, conta.saldo);
 	}
 
 	@Override

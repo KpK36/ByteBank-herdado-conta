@@ -1,6 +1,7 @@
 package br.com.bytebank.banco.teste;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class TesteComparator {
 
 		Cliente joao = new Cliente("Joao");
 		Conta cc2 = new ContaCorrente(1400, 2000, joao);
-		cc2.deposita(200);
+		cc2.deposita(304);
 
 		Cliente alfredo = new Cliente("Alfredo");
 		Conta cc3 = new ContaCorrente(1200, 2000, alfredo);
@@ -33,11 +34,9 @@ public class TesteComparator {
 		lista.add(cc1);
 		lista.add(cc2);
 		lista.add(cc3);
-		lista.add(cc4);
+		lista.add(cc4);	
 
-		NumeroDaContaComparator numerodaContaComparator = new NumeroDaContaComparator();
-		
-		lista.sort(numerodaContaComparator);
+		lista.sort(new NumeroDaContaComparator());
 
 		for (Conta conta : lista) {
 
@@ -45,15 +44,18 @@ public class TesteComparator {
 
 		}
 
-		TitularContaComparator titularContaComparator = new TitularContaComparator();
-
+		TitularContaComparator titularContaComparator;
+		
+		
 		System.out.println("---------");
 
-		lista.sort(titularContaComparator);
+		lista.sort(new TitularContaComparator());
+		Collections.sort(lista);
 
 		for (Conta conta : lista) {
 			System.out.println(conta + ", " + conta.getTitular().getNome());
-		}
+		}		
+		
 
 	}
 
@@ -76,14 +78,6 @@ class NumeroDaContaComparator implements Comparator<Conta> {
 	@Override
 	public int compare(Conta c1, Conta c2) {
 
-		if (c1.getNumero() < c2.getNumero()) {
-			return -1;
-		}
-
-		if (c1.getNumero() > c2.getNumero()) {
-			return 1;
-		}
-
-		return 0;
+		return Integer.compare(c1.getNumero(), c2.getNumero());
 	}
 }
