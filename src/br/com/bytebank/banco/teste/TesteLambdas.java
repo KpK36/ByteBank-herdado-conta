@@ -57,18 +57,11 @@ public class TesteLambdas {
 
 		});
 		// Collections.sort(lista);
-
-//		Como podemos inverter a ordem de uma lista?
-//		Como podemos embaralhar todos os elementos de uma lista?
-//		Como podemos rotacionar os elementos de uma lista?
-
 		// Collections.reverse(lista);
 		// Collections.shuffle(lista);
-		//Collections.rotate(lista, 1);
-
-		for (Conta conta : lista) {
-			System.out.println(conta + ", " + conta.getTitular().getNome());
-		}
+		// Collections.rotate(lista, 1);
+		
+		lista.forEach((conta) -> System.out.println(conta + ", " + conta.getTitular().getNome()));		
 
 	}
 
