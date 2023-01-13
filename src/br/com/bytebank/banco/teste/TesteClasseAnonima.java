@@ -9,12 +9,12 @@ import br.com.bytebank.banco.modelo.Cliente;
 import br.com.bytebank.banco.modelo.Conta;
 import br.com.bytebank.banco.modelo.ContaCorrente;
 
-public class TesteComparator {
+public class TesteClasseAnonima {
 
 	public static void main(String[] args) {
 
-		Cliente jorge = new Cliente("Jorge");
-		Conta cc1 = new ContaCorrente(1000, 2000, jorge);
+		Cliente lucas = new Cliente("Lucas");
+		Conta cc1 = new ContaCorrente(1000, 2000, lucas);
 		cc1.deposita(100);
 
 		Cliente joao = new Cliente("Joao");
@@ -34,50 +34,51 @@ public class TesteComparator {
 		lista.add(cc1);
 		lista.add(cc2);
 		lista.add(cc3);
-		lista.add(cc4);	
+		lista.add(cc4);
 
-		lista.sort(new NumeroDaContaComparator());
+		Comparator<Conta> comp = new Comparator<Conta>() {
+
+			@Override
+			public int compare(Conta c1, Conta c2) {
+
+				return Integer.compare(c1.getNumero(), c2.getNumero());
+			}
+		}			
+;
 
 		for (Conta conta : lista) {
 
 			System.out.println(conta);
 
 		}
-
-		TitularContaComparator titularContaComparator;
-		
-		
 		System.out.println("---------");
 
-		lista.sort(new TitularContaComparator());
-		Collections.sort(lista);
+		
+		// classe anonima
+		lista.sort(new Comparator<Conta>() {
+
+			@Override
+			public int compare(Conta c1, Conta c2) {
+
+				String nomec1 = c1.getTitular().getNome();
+				String nomec2 = c2.getTitular().getNome();
+				return nomec1.compareToIgnoreCase(nomec2);
+			}
+		});
+		// Collections.sort(lista);
+
+//		Como podemos inverter a ordem de uma lista?
+//		Como podemos embaralhar todos os elementos de uma lista?
+//		Como podemos rotacionar os elementos de uma lista?
+
+		// Collections.reverse(lista);
+		// Collections.shuffle(lista);
+		Collections.rotate(lista, 1);
 
 		for (Conta conta : lista) {
 			System.out.println(conta + ", " + conta.getTitular().getNome());
-		}		
-		
+		}
 
 	}
 
-}
-
-class TitularContaComparator implements Comparator<Conta> {
-
-	@Override
-	public int compare(Conta c1, Conta c2) {
-
-		String nomec1 = c1.getTitular().getNome();
-		String nomec2 = c2.getTitular().getNome();
-		return nomec1.compareToIgnoreCase(nomec2);
-	}
-
-}
-
-class NumeroDaContaComparator implements Comparator<Conta> {
-
-	@Override
-	public int compare(Conta c1, Conta c2) {
-
-		return Integer.compare(c1.getNumero(), c2.getNumero());
-	}
 }
